@@ -143,6 +143,10 @@ namespace Project.Networking {
             });
         }
 
+        public void AttemptToJoinLobby() {
+            Emit("joinGame");
+        }
+
     }
 
     [Serializable]
