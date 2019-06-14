@@ -62,7 +62,7 @@ module.exports = class GameLobbby extends LobbyBase {
             if(isDestroyed) {
                 lobby.despawnBullet(bullet);
             } else {
-                var returnData = {
+                /*var returnData = {
                     id: bullet.id,
                     position: {
                         x: bullet.position.x,
@@ -72,7 +72,7 @@ module.exports = class GameLobbby extends LobbyBase {
 
                 connections.forEach(connection => {
                     connection.socket.emit('updatePosition', returnData);
-                });
+                });*/
             }
         });
     }
@@ -127,7 +127,8 @@ module.exports = class GameLobbby extends LobbyBase {
             direction: {
                 x: bullet.direction.x,
                 y: bullet.direction.y
-            }
+            },
+            speed: bullet.speed
         }
 
         connection.socket.emit('serverSpawn', returnData);

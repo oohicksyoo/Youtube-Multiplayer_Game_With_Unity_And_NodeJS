@@ -11,6 +11,8 @@ using Project.Gameplay;
 namespace Project.Networking {
     public class NetworkClient : SocketIOComponent {
 
+        public const float SERVER_UPDATE_TIME = 10;
+
         [Header("Network Client")]
         [SerializeField]
         private Transform networkContainer;
@@ -107,6 +109,7 @@ namespace Project.Networking {
                         float directionX = E.data["direction"]["x"].f;
                         float directionY = E.data["direction"]["y"].f;
                         string activator = E.data["activator"].ToString().RemoveQuotes();
+                        float speed = E.data["speed"].f;
 
                         float rot = Mathf.Atan2(directionY, directionX) * Mathf.Rad2Deg;
                         Vector3 currentRotation = new Vector3(0, 0, rot - 90);
@@ -114,6 +117,10 @@ namespace Project.Networking {
 
                         WhoActivatedMe whoActivatedMe = spawnedObject.GetComponent<WhoActivatedMe>();
                         whoActivatedMe.SetActivator(activator);
+
+                        Projectile projectile = spawnedObject.GetComponent<Projectile>();
+                        projectile.Direction = new Vector2(directionX, directionY);
+                        projectile.Speed = speed;
                     }
 
                     serverObjects.Add(id, ni);
