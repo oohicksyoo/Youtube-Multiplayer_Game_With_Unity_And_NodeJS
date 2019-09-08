@@ -148,6 +148,13 @@ namespace Project.Networking {
                 ni.transform.position = new Vector3(x, y, 0);
                 ni.gameObject.SetActive(true);
             });
+            
+            On("loadGame", (E) => {
+                Debug.Log("Switching to game");
+                SceneManagementManager.Instance.LoadLevel(SceneList.LEVEL, (levelName) => {
+                    SceneManagementManager.Instance.UnLoadLevel(SceneList.MAIN_MENU);
+                });
+            });
         }
 
         public void AttemptToJoinLobby() {

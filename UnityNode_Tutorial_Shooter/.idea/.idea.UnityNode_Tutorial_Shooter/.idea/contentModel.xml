@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Alex\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_UnityNode_Tutorial_Shooter.1243482556.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Alex\Documents\GitHub\Youtube-Multiplayer_Game_With_Unity_And_NodeJS\UnityNode_Tutorial_Shooter" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Code" t="Include">
+          <e p="Gameplay" t="Include">
+            <e p="CollisionDestroy.cs" t="Include" />
+            <e p="Projectile.cs" t="Include" />
+            <e p="WhoActivatedMe.cs" t="Include" />
+          </e>
+          <e p="Managers" t="Include">
+            <e p="ApplicationManager.cs" t="Include" />
+            <e p="MenuManager.cs" t="Include" />
+          </e>
+          <e p="Networking" t="Include">
+            <e p="NetworkClient.cs" t="Include" />
+            <e p="NetworkIdentity.cs" t="Include" />
+            <e p="NetworkRotation.cs" t="Include" />
+            <e p="NetworkTransform.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="PlayerManager.cs" t="Include" />
+          </e>
+          <e p="Scriptable" t="Include">
+            <e p="ServerObjects.cs" t="Include" />
+          </e>
+          <e p="Utility" t="Include">
+            <e p="Attributes" t="Include">
+              <e p="GreyOut.cs" t="Include" />
+            </e>
+            <e p="Cooldown.cs" t="Include" />
+            <e p="MethodExtensions.cs" t="Include" />
+            <e p="SceneManagementManager.cs" t="Include" />
+            <e p="Singleton.cs" t="Include" />
+          </e>
+        </e>
+        <e p="SocketIO" t="Include">
+          <e p="JSONObject" t="Include">
+            <e p="Editor" t="Include">
+              <e p="JSONChecker.cs" t="Include" />
+            </e>
+            <e p="JSONObject.cs" t="Include" />
+            <e p="JSONTemplates.cs" t="Include" />
+            <e p="readme.txt" t="Include" />
+            <e p="VectorTemplates.cs" t="Include" />
+          </e>
+          <e p="readme.txt" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="SocketIO" t="Include">
+              <e p="Ack.cs" t="Include" />
+              <e p="Decoder.cs" t="Include" />
+              <e p="Encoder.cs" t="Include" />
+              <e p="EnginePacketType.cs" t="Include" />
+              <e p="Packet.cs" t="Include" />
+              <e p="Parser.cs" t="Include" />
+              <e p="SocketIOComponent.cs" t="Include" />
+              <e p="SocketIOEvent.cs" t="Include" />
+              <e p="SocketIOException.cs" t="Include" />
+              <e p="SocketPacketType.cs" t="Include" />
+            </e>
+            <e p="Test" t="Include">
+              <e p="TestSocketIO.cs" t="Include" />
+            </e>
+          </e>
+          <e p="WebsocketSharp" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+            <e p="ByteOrder.cs" t="Include" />
+            <e p="CloseEventArgs.cs" t="Include" />
+            <e p="CloseStatusCode.cs" t="Include" />
+            <e p="CompressionMethod.cs" t="Include" />
+            <e p="ErrorEventArgs.cs" t="Include" />
+            <e p="Ext.cs" t="Include" />
+            <e p="Fin.cs" t="Include" />
+            <e p="HandshakeBase.cs" t="Include" />
+            <e p="HandshakeRequest.cs" t="Include" />
+            <e p="HandshakeResponse.cs" t="Include" />
+            <e p="LogData.cs" t="Include" />
+            <e p="Logger.cs" t="Include" />
+            <e p="LogLevel.cs" t="Include" />
+            <e p="Mask.cs" t="Include" />
+            <e p="MessageEventArgs.cs" t="Include" />
+            <e p="Net" t="Include">
+              <e p="AuthenticationBase.cs" t="Include" />
+              <e p="AuthenticationChallenge.cs" t="Include" />
+              <e p="AuthenticationResponse.cs" t="Include" />
+              <e p="AuthenticationSchemes.cs" t="Include" />
+              <e p="Chunk.cs" t="Include" />
+              <e p="ChunkedRequestStream.cs" t="Include" />
+              <e p="ChunkStream.cs" t="Include" />
+              <e p="Cookie.cs" t="Include" />
+              <e p="CookieCollection.cs" t="Include" />
+              <e p="CookieException.cs" t="Include" />
+              <e p="EndPointListener.cs" t="Include" />
+              <e p="EndPointManager.cs" t="Include" />
+              <e p="HttpBasicIdentity.cs" t="Include" />
+              <e p="HttpConnection.cs" t="Include" />
+              <e p="HttpDigestIdentity.cs" t="Include" />
+              <e p="HttpHeaderInfo.cs" t="Include" />
+              <e p="HttpHeaderType.cs" t="Include" />
+              <e p="HttpListener.cs" t="Include" />
+              <e p="HttpListenerContext.cs" t="Include" />
+              <e p="HttpListenerException.cs" t="Include" />
+              <e p="HttpListenerPrefixCollection.cs" t="Include" />
+              <e p="HttpListenerRequest.cs" t="Include" />
+              <e p="HttpListenerResponse.cs" t="Include" />
+              <e p="HttpStatusCode.cs" t="Include" />
+              <e p="HttpStreamAsyncResult.cs" t="Include" />
+              <e p="HttpUtility.cs" t="Include" />
+              <e p="HttpVersion.cs" t="Include" />
+              <e p="InputChunkState.cs" t="Include" />
+              <e p="InputState.cs" t="Include" />
+              <e p="LineState.cs" t="Include" />
+              <e p="ListenerAsyncResult.cs" t="Include" />
+              <e p="ListenerPrefix.cs" t="Include" />
+              <e p="NetworkCredential.cs" t="Include" />
+              <e p="QueryStringCollection.cs" t="Include" />
+              <e p="ReadBufferState.cs" t="Include" />
+              <e p="RequestStream.cs" t="Include" />
+              <e p="ResponseStream.cs" t="Include" />
+              <e p="Security" t="Include">
+                <e p="SslStream.cs" t="Include" />
+              </e>
+              <e p="WebHeaderCollection.cs" t="Include" />
+              <e p="WebSockets" t="Include">
+                <e p="HttpListenerWebSocketContext.cs" t="Include" />
+                <e p="TcpListenerWebSocketContext.cs" t="Include" />
+                <e p="WebSocketContext.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Opcode.cs" t="Include" />
+            <e p="PayloadData.cs" t="Include" />
+            <e p="Rsv.cs" t="Include" />
+            <e p="WebSocket.cs" t="Include" />
+            <e p="WebSocketException.cs" t="Include" />
+            <e p="WebSocketFrame.cs" t="Include" />
+            <e p="WebSocketState.cs" t="Include" />
+            <e p="WebSocketStream.cs" t="Include" />
+          </e>
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="UnityNode_Tutorial_Shooter.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

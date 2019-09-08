@@ -31,10 +31,13 @@ module.exports = class GameLobbby extends LobbyBase {
 
     onEnterLobby(connection = Connection) {
         let lobby = this;
+        let socket = connection.socket;
 
         super.onEnterLobby(connection);
 
         lobby.addPlayer(connection);
+
+        socket.emit('loadGame');
 
         //Handle spawning any server spawned objects here
         //Example: loot, perhaps flying bullets etc
