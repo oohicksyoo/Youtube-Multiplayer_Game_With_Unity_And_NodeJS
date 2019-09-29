@@ -13,6 +13,8 @@ namespace Project.Networking {
 
         public const float SERVER_UPDATE_TIME = 10;
 
+        public static Action<SocketIOEvent> OnGameStateChange = (E) => { };
+        
         [Header("Network Client")]
         [SerializeField]
         private Transform networkContainer;
@@ -154,6 +156,10 @@ namespace Project.Networking {
                 SceneManagementManager.Instance.LoadLevel(SceneList.LEVEL, (levelName) => {
                     SceneManagementManager.Instance.UnLoadLevel(SceneList.MAIN_MENU);
                 });
+            });
+            
+            On("lobbyUpdate", (E) => {
+                OnGameStateChange.Invoke(E);
             });
         }
 

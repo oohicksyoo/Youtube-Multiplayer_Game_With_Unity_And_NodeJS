@@ -58,7 +58,13 @@ module.exports = class Server {
         });
 
         //Preform lobby clean up
-        server.lobbys[connection.player.lobby].onLeaveLobby(connection);
+        let currentLobbyIndex = connection.player.lobby;
+        server.lobbys[currentLobbyIndex].onLeaveLobby(connection);
+
+        if (server.lobbys[currentLobbyIndex] != 0 && server.lobbys[currentLobbyIndex].connections.length == 0) {
+            console.log('Closing down lobby (' + currentLobbyIndex + ')');
+            server.lobbys.splice(currentLobbyIndex, 1);
+        }
     }
 
     onAttemptToJoinGame(connection = Connection) {
