@@ -23,4 +23,11 @@ module.exports = class Vector2 {
     ConsoleOutput() {
         return '(' + this.x + ',' + this.y + ')';
     }
+
+    JSONData() {
+        return {
+            x: this.x,
+            y: this.y
+        }
+    }
 }
