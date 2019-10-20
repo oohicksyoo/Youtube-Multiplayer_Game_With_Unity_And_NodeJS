@@ -151,6 +151,26 @@ module.exports = class GameLobbby extends LobbyBase {
                 }
             }
         });
+
+        let aiList = lobby.serverItems.filter(item => {return item instanceof AIBase;});
+        aiList.forEach(ai => {
+            if(ai.isDead) {
+                let isRespawn = ai.respawnCounter();
+                if(isRespawn) {
+                    let socket = connections[0].socket;
+                    let returnData = {
+                        id: ai.id,
+                        position: {
+                            x: ai.position.x,
+                            y: ai.position.y
+                        }
+                    }
+
+                    socket.emit('playerRespawn', returnData);
+                    socket.broadcast.to(lobby.id).emit('playerRespawn', returnData);
+                }
+            }
+        });
     }
 
     onFireBullet(connection = Connection, data) {
@@ -201,7 +221,7 @@ module.exports = class GameLobbby extends LobbyBase {
                 if(bullet.activator != player.id) {
                     let distance = bullet.position.Distance(player.position);
 
-                    if(distance < 0.65) {
+                    if(distance < 0.8) {
                         let isDead = player.dealDamage(50);
                         if(isDead) {
                             console.log('Player with id: ' + player.id + ' has died');
@@ -213,10 +233,36 @@ module.exports = class GameLobbby extends LobbyBase {
                         } else {
                             console.log('Player with id: ' + player.id + ' has (' + player.health + ') health left');
                         }
+                        playerHit = true;
                         lobby.despawnBullet(bullet);
                     }
                 }
             });
+
+            if (!playerHit) {
+                let aiList = lobby.serverItems.filter(item => {return item instanceof AIBase;});
+                aiList.forEach(ai => {
+                    if (bullet.activator != ai.id) {
+                        let distance = bullet.position.Distance(ai.position);
+
+                        if (distance < 0.8) {
+                            let isDead = ai.dealDamage(50);
+                            if (isDead) {
+                                console.log('Ai has died');
+                                let returnData = {
+                                    id: ai.id
+                                }
+                                lobby.connections[0].socket.emit('playerDied', returnData);
+                                lobby.connections[0].socket.broadcast.to(lobby.id).emit('playerDied', returnData);
+                            } else {
+                                console.log('AI with id: ' + ai.id + ' has (' + ai.health + ') health left');
+                            }
+                        }
+                        playerHit = true;
+                        lobby.despawnBullet(bullet);
+                    }
+                });
+            }
 
             if(!playerHit) {
                 bullet.isDestroyed = true;
