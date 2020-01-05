@@ -11,8 +11,11 @@ module.exports = class AIBase extends ServerItem {
         this.respawnTime = new Number(0);
     }
 
-    onUpdate(onUpdatePosition) {
+    onUpdate(onUpdatePosition, onUpdateRotation) {
         //Calculate Statemachine
+    }
+
+    onObtainTarget(connections) {         
     }
 
     respawnCounter() {
@@ -50,5 +53,9 @@ module.exports = class AIBase extends ServerItem {
         }
 
         return this.isDead;
+    }
+
+    radiansToDegrees() {
+        return new Number(57.29578);
     }
 }

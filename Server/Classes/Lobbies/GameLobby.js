@@ -6,6 +6,7 @@ let LobbyState = require('../Utility/LobbyState')
 let Vector2 = require('../Vector2')
 let ServerItem = require('../Utility/ServerItem')
 let AIBase = require('../AI/AIBase')
+let TankAI = require('../AI/TankAI')
 
 module.exports = class GameLobbby extends LobbyBase {
     constructor(id, settings = GameLobbySettings) {
@@ -86,7 +87,7 @@ module.exports = class GameLobbby extends LobbyBase {
 
     onSpawnAIIntoGame() {
         let lobby = this;
-        lobby.onServerSpawn(new AIBase(), new Vector2());
+        lobby.onServerSpawn(new TankAI(), new Vector2());
     }
 
     onUnspawnAllAIInGame(connection = Connection) {

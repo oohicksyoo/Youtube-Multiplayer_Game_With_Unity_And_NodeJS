@@ -17,10 +17,17 @@ module.exports = class LobbyBase {
         let aiList = serverItems.filter(item => {return item instanceof AIBase;});
         aiList.forEach(ai => {
             //Update each ai unity, passing in a function for those that need to update other connections
+            ai.onObtainTarget(lobby.connections);
+
             ai.onUpdate(data => {
                 lobby.connections.forEach(connection => {
                     let socket = connection.socket;
                     socket.emit('updatePosition', data);
+                });
+            }, (data) => {
+                lobby.connections.forEach(connection => {
+                    let socket = connection.socket;
+                    socket.emit('updateRotation', data);
                 });
             });
         });
