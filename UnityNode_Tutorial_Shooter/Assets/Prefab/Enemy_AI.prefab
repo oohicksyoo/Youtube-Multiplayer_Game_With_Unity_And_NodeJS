@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7037215800481539975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386465503415726918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b954f013d6226194b80752ea4cc5cb03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankTransform: {fileID: 8388480446930079056}
+  barrelTransform: {fileID: 8388205167007206474}
 --- !u!1001 &8387561496602957036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,3 +79,21 @@ PrefabInstance:
     - {fileID: 114879537092668376, guid: a9d96022088a8d74dbaa8c5fbba4f562, type: 3}
     - {fileID: 114207204060594284, guid: a9d96022088a8d74dbaa8c5fbba4f562, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a9d96022088a8d74dbaa8c5fbba4f562, type: 3}
+--- !u!1 &8386465503415726918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1177906942977962, guid: a9d96022088a8d74dbaa8c5fbba4f562,
+    type: 3}
+  m_PrefabInstance: {fileID: 8387561496602957036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8388480446930079056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4297133239867836, guid: a9d96022088a8d74dbaa8c5fbba4f562,
+    type: 3}
+  m_PrefabInstance: {fileID: 8387561496602957036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8388205167007206474 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4079831617427622, guid: a9d96022088a8d74dbaa8c5fbba4f562,
+    type: 3}
+  m_PrefabInstance: {fileID: 8387561496602957036}
+  m_PrefabAsset: {fileID: 0}

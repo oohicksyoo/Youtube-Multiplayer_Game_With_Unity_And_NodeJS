@@ -15,6 +15,6 @@ MonoBehaviour:
   Objects:
   - Name: Bullet
     Prefab: {fileID: 1242747090728848, guid: 194e55d67c30b834f8a1cca651e40a12, type: 3}
-  - Name: AI_Base
+  - Name: AI_Tank
     Prefab: {fileID: 8386465503415726918, guid: adb4e96186887b649bdbbeb1b1a57634,
       type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 using SocketIO;
 using Project.Utility;
 using System;
+using Project.AI;
 using Project.Player;
 using Project.Scriptable;
 using Project.Gameplay;
@@ -88,7 +89,12 @@ namespace Project.Networking {
 
                 NetworkIdentity ni = serverObjects[id];
                 ni.transform.localEulerAngles = new Vector3(0, 0, tankRotation);
-                ni.GetComponent<PlayerManager>().SetRotation(barrelRotation);
+
+                if (ni.GetComponent<PlayerManager>() == null) {
+                    ni.GetComponent<AIManager>().SetBarrelRotation(barrelRotation);
+                } else {
+                    ni.GetComponent<PlayerManager>().SetRotation(barrelRotation);
+                }
             });
 
             On("serverSpawn", (E) => {
