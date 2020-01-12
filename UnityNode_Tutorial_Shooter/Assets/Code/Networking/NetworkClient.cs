@@ -89,11 +89,21 @@ namespace Project.Networking {
 
                 NetworkIdentity ni = serverObjects[id];
                 ni.transform.localEulerAngles = new Vector3(0, 0, tankRotation);
-
-                if (ni.GetComponent<PlayerManager>() == null) {
+                ni.GetComponent<PlayerManager>().SetRotation(barrelRotation);
+            });
+            
+            On("updateAI", (E) => {
+                string id = E.data["id"].ToString().RemoveQuotes();
+                float x = E.data["position"]["x"].f;
+                float y = E.data["position"]["y"].f;
+                float tankRotation = E.data["tankRotation"].f;
+                float barrelRotation = E.data["barrelRotation"].f;
+                
+                NetworkIdentity ni = serverObjects[id];
+                if (ni.gameObject.activeInHierarchy) {
+                    StartCoroutine(AIPositionSmoothing(ni.transform, new Vector3(x, y, 0)));
+                    ni.GetComponent<AIManager>().SetTankRotation(tankRotation);
                     ni.GetComponent<AIManager>().SetBarrelRotation(barrelRotation);
-                } else {
-                    ni.GetComponent<PlayerManager>().SetRotation(barrelRotation);
                 }
             });
 
@@ -145,6 +155,10 @@ namespace Project.Networking {
             On("playerDied", (E) => {
                 string id = E.data["id"].ToString().RemoveQuotes();
                 NetworkIdentity ni = serverObjects[id];
+                if (ni.GetComponent<AIManager>()) {
+                    ni.GetComponent<AIManager>().StopCoroutines();
+                }
+
                 ni.gameObject.SetActive(false);
             });
 
@@ -171,6 +185,29 @@ namespace Project.Networking {
 
         public void AttemptToJoinLobby() {
             Emit("joinGame");
+        }
+
+        private IEnumerator AIPositionSmoothing(Transform aiTransform, Vector3 goalPosition) {
+            float count = 0.1f; //In sync with server update
+            float currentTime = 0.0f;
+            Vector3 startPosition = aiTransform.position;
+
+            while (currentTime < count) {
+                currentTime += Time.deltaTime;
+
+                if (currentTime < count) {
+                    aiTransform.position = Vector3.Lerp(startPosition, goalPosition, currentTime / count);
+                }
+
+                yield return new WaitForEndOfFrame();
+
+                if (aiTransform == null) {
+                    currentTime = count;
+                    yield return null;
+                }
+            }
+
+            yield return null;
         }
 
     }
