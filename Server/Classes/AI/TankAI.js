@@ -11,9 +11,14 @@ module.exports = class TankAI extends AIBase {
 
         //Tank Stats
         this.rotation = 0;
+
+        //Shooting
+        this.canShoot = false;
+        this.currentTime = Number(0);
+        this.reloadTime = Number(3);
     }
 
-    onUpdate(onUpdateAI) {
+    onUpdate(onUpdateAI, onFireBullet) {
         let ai = this;
 
         if (!ai.hasTarget) {
@@ -45,6 +50,22 @@ module.exports = class TankAI extends AIBase {
         ai.rotation = ai.rotation + angleStep; //Apple the angle step
         let forwardDirection = ai.getForwardDirection();
 
+        //Shooting
+        if (ai.canShoot) {
+            onFireBullet({
+                activator: ai.id,
+                position: ai.position.JSONData(),
+                direction: direction.JSONData()
+            });
+            ai.canShoot = false;
+            ai.currentTime = Number(0);
+        } else {
+            ai.currentTime = Number(ai.currentTime) + Number(0.1);
+            if (ai.currentTime >= ai.reloadTime) {
+                ai.canShoot = true;
+            }
+        }
+
         //Apply position from forward direction
         if (Math.abs(angleAmount) < 10) {
             if (distance > 3.5) {
@@ -56,7 +77,7 @@ module.exports = class TankAI extends AIBase {
             }
         }
 
-        console.log(ai.id + ': bar(' + rotation + ') tank(' + ai.rotation + ')');
+        //console.log(ai.id + ': bar(' + rotation + ') tank(' + ai.rotation + ')');
 
         onUpdateAI({
             id: ai.id,

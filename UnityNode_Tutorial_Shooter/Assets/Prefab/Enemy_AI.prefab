@@ -74,6 +74,11 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1724691162902348263, guid: a9d96022088a8d74dbaa8c5fbba4f562,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114575483894733484, guid: a9d96022088a8d74dbaa8c5fbba4f562, type: 3}
     - {fileID: 114879537092668376, guid: a9d96022088a8d74dbaa8c5fbba4f562, type: 3}

@@ -17,9 +17,25 @@ module.exports = class GameLobbby extends LobbyBase {
     }
 
     onUpdate() {
-        let lobby = this;
-
         super.onUpdate();
+
+        let lobby = this;
+        let serverItems = lobby.serverItems; 
+        
+        let aiList = serverItems.filter(item => {return item instanceof AIBase;});
+        aiList.forEach(ai => {
+            //Update each ai unity, passing in a function for those that need to update other connections
+            ai.onObtainTarget(lobby.connections);
+
+            ai.onUpdate(data => {
+                lobby.connections.forEach(connection => {
+                    let socket = connection.socket;
+                    socket.emit('updateAI', data);
+                });
+            }, (data) => {
+                lobby.onFireBullet(undefined, data, true);
+            });
+        });
 
         lobby.updateBullets();
         lobby.updateDeadPlayers();
@@ -174,7 +190,7 @@ module.exports = class GameLobbby extends LobbyBase {
         });
     }
 
-    onFireBullet(connection = Connection, data) {
+    onFireBullet(connection = Connection, data, isAI = false) {
         let lobby = this;
 
         let bullet = new Bullet();
@@ -202,8 +218,13 @@ module.exports = class GameLobbby extends LobbyBase {
             speed: bullet.speed
         }
 
-        connection.socket.emit('serverSpawn', returnData);
-        connection.socket.broadcast.to(lobby.id).emit('serverSpawn', returnData); //Only broadcast to those in the same lobby as us
+        if (!isAI) {
+            connection.socket.emit('serverSpawn', returnData);
+            connection.socket.broadcast.to(lobby.id).emit('serverSpawn', returnData); //Only broadcast to those in the same lobby as us
+        } else if (lobby.connections.length > 0) {
+            lobby.connections[0].socket.emit('serverSpawn', returnData);
+            lobby.connections[0].socket.broadcast.to(lobby.id).emit('serverSpawn', returnData); //Broadcast to everyone that the ai spawned a bullet for
+        }        
     }
 
     onCollisionDestroy(connection = Connection, data) {

@@ -11,21 +11,7 @@ module.exports = class LobbyBase {
     }
 
     onUpdate() {       
-        let lobby = this;
-        let serverItems = lobby.serverItems;
-        
-        let aiList = serverItems.filter(item => {return item instanceof AIBase;});
-        aiList.forEach(ai => {
-            //Update each ai unity, passing in a function for those that need to update other connections
-            ai.onObtainTarget(lobby.connections);
-
-            ai.onUpdate(data => {
-                lobby.connections.forEach(connection => {
-                    let socket = connection.socket;
-                    socket.emit('updateAI', data);
-                });
-            });
-        });
+        let lobby = this;        
     }
 
     onEnterLobby(connection = Connection) {
