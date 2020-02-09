@@ -87,7 +87,7 @@ module.exports = class GameLobbby extends LobbyBase {
 
     onSpawnAIIntoGame() {
         let lobby = this;
-        lobby.onServerSpawn(new TankAI(), new Vector2());
+        lobby.onServerSpawn(new TankAI(), new Vector2(-6, 2));
     }
 
     onUnspawnAllAIInGame(connection = Connection) {

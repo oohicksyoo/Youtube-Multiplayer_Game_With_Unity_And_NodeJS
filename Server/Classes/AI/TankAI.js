@@ -8,9 +8,12 @@ module.exports = class TankAI extends AIBase {
 
         this.target;
         this.hasTarget = false;
+
+        //Tank Stats
+        this.rotation = 0;
     }
 
-    onUpdate(onUpdatePosition, onUpdateRotation) {
+    onUpdate(onUpdateAI) {
         let ai = this;
 
         if (!ai.hasTarget) {
@@ -26,6 +29,9 @@ module.exports = class TankAI extends AIBase {
         direction.y = targetPosition.y - ai.position.y;
         direction = direction.Normalized();
 
+        //Calculate Distance
+        let distance = ai.position.Distance(targetPosition);
+
         //Calculate barrel rotation
         let rotation = Math.atan2(direction.y, direction.x) * ai.radiansToDegrees();
 
@@ -33,9 +39,29 @@ module.exports = class TankAI extends AIBase {
             return;
         }
 
-        onUpdateRotation({
+        //Movement
+        let angleAmount = ai.getAngleDifference(ai.rotation, rotation); //Direction we need the angle to rotate
+        let angleStep = angleAmount * ai.rotationSpeed; //Dont just snap but rotate towards
+        ai.rotation = ai.rotation + angleStep; //Apple the angle step
+        let forwardDirection = ai.getForwardDirection();
+
+        //Apply position from forward direction
+        if (Math.abs(angleAmount) < 10) {
+            if (distance > 3.5) {
+                ai.position.x = ai.position.x + forwardDirection.x * ai.speed;
+                ai.position.y = ai.position.y + forwardDirection.y * ai.speed;
+            } else if (distance <= 2.5) {
+                ai.position.x = ai.position.x - forwardDirection.x * ai.speed;
+                ai.position.y = ai.position.y - forwardDirection.y * ai.speed;
+            }
+        }
+
+        console.log(ai.id + ': bar(' + rotation + ') tank(' + ai.rotation + ')');
+
+        onUpdateAI({
             id: ai.id,
-            tankRotation: 0,
+            position: ai.position.JSONData(),
+            tankRotation: ai.rotation,
             barrelRotation: rotation
         });
     }
@@ -64,5 +90,19 @@ module.exports = class TankAI extends AIBase {
         }
 
         ai.hasTarget = foundTarget;
+    }
+
+    getForwardDirection() {
+        let ai = this;
+
+        let radiansRotation = (ai.rotation + 90) * ai.degreesToRadians(); //We need the 90 degree art offset to get the correct vector
+        let sin = Math.sin(radiansRotation);
+        let cos = Math.cos(radiansRotation);
+
+        let worldUpVector = ai.worldUpVector();
+        let tx = worldUpVector.x;
+        let ty = worldUpVector.y;
+
+        return new Vector2((cos * tx) - (sin * ty), (sin * tx) + (cos * ty));
     }
 }

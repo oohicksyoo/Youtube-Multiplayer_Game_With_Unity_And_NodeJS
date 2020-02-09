@@ -22,12 +22,7 @@ module.exports = class LobbyBase {
             ai.onUpdate(data => {
                 lobby.connections.forEach(connection => {
                     let socket = connection.socket;
-                    socket.emit('updatePosition', data);
-                });
-            }, (data) => {
-                lobby.connections.forEach(connection => {
-                    let socket = connection.socket;
-                    socket.emit('updateRotation', data);
+                    socket.emit('updateAI', data);
                 });
             });
         });
