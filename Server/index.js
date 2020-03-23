@@ -3,7 +3,13 @@ let Server = require('./Classes/Server')
 
 console.log('Server has started');
 
-let server = new Server();
+if (process.env.PORT == undefined) {
+    console.log('Local Server');
+} else {
+    console.log('Hosted Server');
+}
+
+let server = new Server(process.env.PORT == undefined);
 
 setInterval(() => {
     server.onUpdate();

@@ -1,5 +1,6 @@
 let Connection = require('./Connection')
 let Player = require('./Player')
+let Database = require('./Database')
 
 //Lobbies
 let LobbyBase = require('./Lobbies/LobbyBase')
@@ -7,11 +8,24 @@ let GameLobby = require('./Lobbies/GameLobby')
 let GameLobbySettings = require('./Lobbies/GameLobbySettings')
 
 module.exports = class Server {
-    constructor() {
+    constructor(isLocal = false) {
+        let server = this;
+        this.database = new Database(isLocal);
         this.connections = [];
         this.lobbys = [];
 
         this.lobbys[0] = new LobbyBase(0);
+
+        //Sample Testing
+        this.database.GetSampleData(results => {
+            console.log(results);
+
+            server.database.GetSampleDataByUsername('bob', r => {
+                console.log(r);
+            });
+        });
+
+        
     }
 
     //Interval update every 100 miliseconds
