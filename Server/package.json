@@ -11,6 +11,7 @@
   "dependencies": {
     "mysql": "^2.18.1",
     "nodemon": "^1.18.4",
+    "password-hash": "^1.2.2",
     "shortid": "^2.2.13",
     "socket.io": "^2.1.1"
   }

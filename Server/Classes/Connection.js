@@ -17,6 +17,24 @@ module.exports = class Connection {
             server.onDisconnected(connection);
         });
 
+        socket.on('createAccount', function(data) {
+            server.database.CreateAccount(data.username, data.password, results => {
+                //Results will return a true or false based on if the account already exists or not
+                console.log(results.valid + ': ' + results.reason);
+            });
+        });
+
+        socket.on('signIn', function(data) {
+            server.database.SignIn(data.username, data.password, results => {
+                //Results will return a true or false based on if the account already exists or not
+                console.log(results.valid + ': ' + results.reason);
+                if (results.valid) {
+                    //Store the username in the player object
+                    socket.emit('signIn');
+                }
+            });
+        });
+
         socket.on('joinGame', function() {
             server.onAttemptToJoinGame(connection);
         });

@@ -15,8 +15,9 @@ namespace Project.Networking {
         public const float SERVER_UPDATE_TIME = 10;
 
         public static Action<SocketIOEvent> OnGameStateChange = (E) => { };
-        
-        [Header("Network Client")]
+        public static Action OnSignInComplete = () => { };
+
+            [Header("Network Client")]
         [SerializeField]
         private Transform networkContainer;
         [SerializeField]
@@ -180,6 +181,10 @@ namespace Project.Networking {
             
             On("lobbyUpdate", (E) => {
                 OnGameStateChange.Invoke(E);
+            });
+            
+            On("signIn", (E) => {
+                OnSignInComplete.Invoke();
             });
         }
 

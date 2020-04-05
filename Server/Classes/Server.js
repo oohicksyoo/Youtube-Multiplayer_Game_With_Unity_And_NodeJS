@@ -14,18 +14,7 @@ module.exports = class Server {
         this.connections = [];
         this.lobbys = [];
 
-        this.lobbys[0] = new LobbyBase(0);
-
-        //Sample Testing
-        this.database.GetSampleData(results => {
-            console.log(results);
-
-            server.database.GetSampleDataByUsername('bob', r => {
-                console.log(r);
-            });
-        });
-
-        
+        this.lobbys[0] = new LobbyBase(0);        
     }
 
     //Interval update every 100 miliseconds
