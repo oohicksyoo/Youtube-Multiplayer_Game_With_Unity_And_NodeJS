@@ -9,8 +9,8 @@ let AIBase = require('../AI/AIBase')
 let TankAI = require('../AI/TankAI')
 
 module.exports = class GameLobbby extends LobbyBase {
-    constructor(id, settings = GameLobbySettings) {
-        super(id);
+    constructor(settings = GameLobbySettings) {
+        super();
         this.settings = settings;
         this.lobbyState = new LobbyState();
         this.bullets = [];
@@ -65,7 +65,7 @@ module.exports = class GameLobbby extends LobbyBase {
             console.log('We have enough players we can start the game');
             lobby.lobbyState.currentState = lobby.lobbyState.GAME;
             lobby.onSpawnAllPlayersIntoGame();
-            lobby.onSpawnAIIntoGame();
+            //lobby.onSpawnAIIntoGame();
         }
 
         let returnData = {

@@ -1,11 +1,12 @@
+let shortID = require('shortid')
 let Connection = require('../Connection')
 let ServerItem = require('../Utility/ServerItem')
 let Vector2 = require('../Vector2')
 let AIBase = require('../AI/AIBase')
 
 module.exports = class LobbyBase {
-    constructor(id) {
-        this.id = id;
+    constructor() {
+        this.id = shortID.generate();
         this.connections = [];
         this.serverItems = [];
     }
