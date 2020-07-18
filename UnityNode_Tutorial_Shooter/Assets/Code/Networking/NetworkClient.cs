@@ -57,13 +57,18 @@ namespace Project.Networking {
                 //Handling all spawning all players
                 //Passed Data
                 string id = E.data["id"].ToString().RemoveQuotes();
+                float x = E.data["position"]["x"].f;
+                float y = E.data["position"]["y"].f;
 
-                GameObject go = Instantiate(playerPrefab, networkContainer);
-                go.name = string.Format("Player ({0})", id);
-                NetworkIdentity ni = go.GetComponent<NetworkIdentity>();
-                ni.SetControllerID(id);
-                ni.SetSocketReference(this);
-                serverObjects.Add(id, ni);
+                if (!serverObjects.ContainsKey(id)) {
+                    GameObject go = Instantiate(playerPrefab, networkContainer);
+                    go.name = string.Format("Player ({0})", id);
+                    go.transform.position = new Vector3(x, y, 0);
+                    NetworkIdentity ni = go.GetComponent<NetworkIdentity>();
+                    ni.SetControllerID(id);
+                    ni.SetSocketReference(this);
+                    serverObjects.Add(id, ni);
+                }
             });
 
             On("disconnected", (E) => {

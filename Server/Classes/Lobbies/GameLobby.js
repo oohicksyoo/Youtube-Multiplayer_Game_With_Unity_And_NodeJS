@@ -157,10 +157,7 @@ module.exports = class GameLobbby extends LobbyBase {
                     let socket = connection.socket;
                     let returnData = {
                         id: player.id,
-                        position: {
-                            x: player.position.x,
-                            y: player.position.y
-                        }
+                        position: lobby.getRandomSpawn()
                     }
 
                     socket.emit('playerRespawn', returnData);
@@ -318,18 +315,23 @@ module.exports = class GameLobbby extends LobbyBase {
         let connections = lobby.connections;
         let socket = connection.socket;
 
+        let randomPosition = lobby.getRandomSpawn();
+        connection.player.position = new Vector2(randomPosition.x, randomPosition.y);
+
         var returnData = {
-            id: connection.player.id
+            id: connection.player.id,
+            position: connection.player.position
         }
 
         socket.emit('spawn', returnData); //tell myself I have spawned
-        //socket.broadcast.to(lobby.id).emit('spawn', returnData); // Tell others
+        socket.broadcast.to(lobby.id).emit('spawn', returnData); // Tell others
 
         //Tell myself about everyone else already in the lobby
         connections.forEach(c => {
             if(c.player.id != connection.player.id) {
                 socket.emit('spawn', {
-                    id: c.player.id
+                    id: c.player.id,
+                    position: c.player.position
                 });
             }
         });
@@ -341,5 +343,20 @@ module.exports = class GameLobbby extends LobbyBase {
         connection.socket.broadcast.to(lobby.id).emit('disconnected', {
             id: connection.player.id
         });
+    }
+
+    getRandomSpawn() {
+        let lobby = this;
+        let index = lobby.getRndInteger(0, lobby.settings.levelData.freeForAllSpawn.length);
+
+        return {
+            x: lobby.settings.levelData.freeForAllSpawn[index].position.x,
+            y: lobby.settings.levelData.freeForAllSpawn[index].position.y
+        }
+    }
+
+    //Includes Min, Exlcudes Max
+    getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 }

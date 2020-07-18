@@ -1,0 +1,87 @@
+{
+    "teamOneSpawn": [
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 7.0,
+                "y": 0.0
+            }
+        }
+    ],
+    "teamTwoSpawn": [
+        {
+            "radius": 0.5,
+            "position": {
+                "x": -7.25,
+                "y": 0.0
+            }
+        }
+    ],
+    "itemSpawn": [
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 0.0,
+                "y": 2.75
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 0.0,
+                "y": -2.5
+            }
+        }
+    ],
+    "freeForAllSpawn": [
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 7.0,
+                "y": -2.5
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 7.0,
+                "y": 3.0
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": -7.25,
+                "y": 3.0
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": -7.25,
+                "y": -3.0
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": -3.5,
+                "y": 0.0
+            }
+        },
+        {
+            "radius": 0.5,
+            "position": {
+                "x": 3.0,
+                "y": 0.0
+            }
+        }
+    ]
+}

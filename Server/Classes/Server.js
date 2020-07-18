@@ -7,6 +7,9 @@ let LobbyBase = require('./Lobbies/LobbyBase')
 let GameLobby = require('./Lobbies/GameLobby')
 let GameLobbySettings = require('./Lobbies/GameLobbySettings')
 
+//Level Data
+let levelData1 = require('../Files/LevelData/Level1.json')
+
 module.exports = class Server {
     constructor(isLocal = false) {
         let server = this;
@@ -103,7 +106,7 @@ module.exports = class Server {
         //All game lobbies full or we have never created one
         if(!lobbyFound) {
             console.log('Making a new game lobby');
-            let gamelobby = new GameLobby(new GameLobbySettings('FFA', 2));
+            let gamelobby = new GameLobby(new GameLobbySettings('FFA', 2, levelData1));
             server.lobbys[gamelobby.id] = gamelobby;
             server.onSwitchLobby(connection, gamelobby.id);
         }

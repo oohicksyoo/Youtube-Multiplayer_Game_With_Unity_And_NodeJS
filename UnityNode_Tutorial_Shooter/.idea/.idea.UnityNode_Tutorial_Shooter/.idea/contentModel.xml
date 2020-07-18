@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="C:\Users\Alex\.Rider2019.3\config\extensions" t="IncludeRecursive" />
     <e p="C:\Users\Alex\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Alex\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_UnityNode_Tutorial_Shooter.1243482556.00" t="ExcludeRecursive" />
     <e p="C:\Users\Alex\Documents\GitHub\Youtube-Multiplayer_Game_With_Unity_And_NodeJS\UnityNode_Tutorial_Shooter" t="IncludeRecursive">
@@ -40,6 +41,8 @@
               <e p="GreyOut.cs" t="Include" />
             </e>
             <e p="Cooldown.cs" t="Include" />
+            <e p="LevelDataEditor.cs" t="Include" />
+            <e p="LevelDataHelper.cs" t="Include" />
             <e p="MethodExtensions.cs" t="Include" />
             <e p="SceneManagementManager.cs" t="Include" />
             <e p="Singleton.cs" t="Include" />
