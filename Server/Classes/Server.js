@@ -72,9 +72,14 @@ module.exports = class Server {
         server.lobbys[currentLobbyIndex].onLeaveLobby(connection);
 
         if (currentLobbyIndex != server.generalServerID && server.lobbys[currentLobbyIndex] != undefined && server.lobbys[currentLobbyIndex].connections.length == 0) {
-            console.log('Closing down lobby (' + currentLobbyIndex + ')');
-            delete server.lobbys[currentLobbyIndex];
+            server.closeDownLobby(currentLobbyIndex);
         }
+    }
+
+    closeDownLobby(index) {
+        let server = this;
+        console.log('Closing down lobby (' + index + ')');
+        delete server.lobbys[index];
     }
 
     onAttemptToJoinGame(connection = Connection) {
@@ -106,7 +111,8 @@ module.exports = class Server {
         //All game lobbies full or we have never created one
         if(!lobbyFound) {
             console.log('Making a new game lobby');
-            let gamelobby = new GameLobby(new GameLobbySettings('FFA', 2, levelData1));
+            let gamelobby = new GameLobby(new GameLobbySettings('FFA', 2, 2, levelData1));
+            gamelobby.endGameLobby = function() {server.closeDownLobby(gamelobby.id)};
             server.lobbys[gamelobby.id] = gamelobby;
             server.onSwitchLobby(connection, gamelobby.id);
         }

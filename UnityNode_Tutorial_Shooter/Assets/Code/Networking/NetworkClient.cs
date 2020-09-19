@@ -8,6 +8,7 @@ using Project.AI;
 using Project.Player;
 using Project.Scriptable;
 using Project.Gameplay;
+using Project.Managers;
 
 namespace Project.Networking {
     public class NetworkClient : SocketIOComponent {
@@ -25,7 +26,20 @@ namespace Project.Networking {
         [SerializeField]
         private ServerObjects serverSpawnables;
 
-        public static string ClientID { get; private set; }
+        public static string ClientID {
+            get; 
+            private set;
+        }
+
+        public static bool IsConnected {
+            get;
+            private set;
+        }
+
+        private static bool OldIsConnected {
+            get;
+            set;
+        }
 
         private Dictionary<string, NetworkIdentity> serverObjects;
 
@@ -37,6 +51,12 @@ namespace Project.Networking {
 
         public override void Update() {
             base.Update();
+
+            if (NetworkClient.OldIsConnected && !NetworkClient.IsConnected) {
+                NetworkClient.OldIsConnected = false;
+                ClientID = "";
+                ReturnToMainMenu();
+            }
         }
 
         private void initialize() {
@@ -48,9 +68,17 @@ namespace Project.Networking {
                 Debug.Log("Connection made to the server");
             });
 
+            On("close", (E) => {
+                NetworkClient.IsConnected = false;
+            });
+
             On("register", (E) => {
                 ClientID = E.data["id"].ToString().RemoveQuotes();
                 Debug.LogFormat("Our Client's ID ({0})", ClientID);
+                
+                //Turn on our connected flags
+                NetworkClient.IsConnected = true;
+                NetworkClient.OldIsConnected = true;
             });
 
             On("spawn", (E) => {
@@ -184,6 +212,10 @@ namespace Project.Networking {
                 });
             });
             
+            On("unloadGame", (E) => {
+                ReturnToMainMenu();
+            });
+            
             On("lobbyUpdate", (E) => {
                 OnGameStateChange.Invoke(E);
             });
@@ -195,6 +227,24 @@ namespace Project.Networking {
 
         public void AttemptToJoinLobby() {
             Emit("joinGame");
+        }
+
+        public void OnQuit() {
+            Emit("quitGame");
+            ReturnToMainMenu();
+        }
+
+        private void ReturnToMainMenu() {
+            foreach (var keyValuePair in serverObjects) {
+                if (keyValuePair.Value != null) {
+                    Destroy(keyValuePair.Value.gameObject);
+                }
+            }
+            serverObjects.Clear();
+            SceneManagementManager.Instance.LoadLevel(SceneList.MAIN_MENU, (levelName) => {
+                SceneManagementManager.Instance.UnLoadLevel(SceneList.LEVEL);
+                FindObjectOfType<MenuManager>().OnSignInComplete();
+            });
         }
 
         private IEnumerator AIPositionSmoothing(Transform aiTransform, Vector3 goalPosition) {

@@ -14,6 +14,7 @@ module.exports = class GameLobbby extends LobbyBase {
         this.settings = settings;
         this.lobbyState = new LobbyState();
         this.bullets = [];
+        this.endGameLobby = function() {};
     }
 
     onUpdate() {
@@ -39,6 +40,11 @@ module.exports = class GameLobbby extends LobbyBase {
 
         lobby.updateBullets();
         lobby.updateDeadPlayers();
+
+        //Clos lobby because no one is here
+        if (lobby.connections.length == 0) {
+            lobby.endGameLobby();
+        }
     }
 
     canEnterLobby(connection = Connection) {
@@ -90,6 +96,16 @@ module.exports = class GameLobbby extends LobbyBase {
         //Handle unspawning any server spawned objects here
         //Example: loot, perhaps flying bullets etc
         lobby.onUnspawnAllAIInGame(connection);
+
+        //Determine if we have enough players to continue the game or not
+        if (lobby.connections.length < lobby.settings.minPlayers) {
+            lobby.connections.forEach(connection => {
+                if (connection != undefined) {
+                    connection.socket.emit('unloadGame');
+                    connection.server.onSwitchLobby(connection, connection.server.generalServerID);
+                }
+            });
+        }
     }
 
     onSpawnAllPlayersIntoGame() {

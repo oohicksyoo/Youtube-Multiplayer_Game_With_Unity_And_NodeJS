@@ -60,6 +60,7 @@ namespace Project.Managers {
         public void OnSignInComplete() {
             signInContainer.SetActive(false);
             joinContainer.SetActive(true);
+            queueButton.interactable = true;
         }
 
         public void OnCreateAccount() {
